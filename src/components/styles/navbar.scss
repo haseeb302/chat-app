@@ -1,0 +1,20 @@
+.navbar-container {
+  display: flex;
+  background-color: #5d5b8d;
+  justify-content: space-around;
+  color: white;
+  .left-container {
+    display: flex;
+    align-items: center;
+    .username {
+    }
+    .logout {
+      background-color: transparent;
+      border: 0;
+      font-weight: bolder;
+      text-decoration: underline;
+      cursor: pointer;
+      color: white;
+    }
+  }
+}

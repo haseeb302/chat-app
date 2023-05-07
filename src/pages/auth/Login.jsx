@@ -1,6 +1,28 @@
+import { useState } from "react";
+import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { auth, db, storage } from "../../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { Link, useNavigate } from "react-router-dom";
 import "../../style.scss";
 
 const Login = () => {
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = e.target[0].value;
+    const password = e.target[1].value;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+      setError(true);
+    }
+  };
   return (
     <div className="container">
       <div className="wrapper">
@@ -8,7 +30,7 @@ const Login = () => {
           <h2 className="app-logo">Chat Now!</h2>
           <p className="form-title">Login</p>
         </div>
-        <div className="form">
+        <form className="form" onSubmit={handleSubmit}>
           <div className="label-input">
             <label>Email: </label>
             <input type="text" />
@@ -18,10 +40,10 @@ const Login = () => {
             <input type="text" />
           </div>
           <button>Login</button>
-        </div>
+        </form>
         <div>
           <p>
-            Don't have an account <a href="#">register</a>
+            Don't have an account <Link to={"/register"}>register</Link>
           </p>
         </div>
       </div>

@@ -10,7 +10,6 @@ const Message = () => {
         </div>
         <div className="messageContent">
           <p>I am waiting for your message longtime</p>
-          {/* {message.img && <img src={message.img} alt="" />} */}
         </div>
       </div>
       <div className="message owner">
